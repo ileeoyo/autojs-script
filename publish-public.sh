@@ -54,34 +54,43 @@ echo "版本描述: $1"
 echo "发布时间: $(date +'%Y-%m-%d %H:%M:%S')"
 echo
 
-echo "0. 拉取远程 main 分支最新代码..."
+echo ">>>>> 0. 拉取远程 main 分支最新代码..."
 git pull origin main
+echo
 
-echo "1. 切换到 public-sync 分支..."
+echo ">>>>> 1. 切换到 public-sync 分支..."
 git checkout public-sync
+echo
 
-echo "2. 拉取远程 public 仓库的 main 分支..."
+echo ">>>>> 2. 拉取远程 public 仓库的 main 分支..."
 git pull public main
+echo
 
-echo "3. 合并本地 main 分支（压缩提交）..."
+echo ">>>>> 3. 合并本地 main 分支（压缩提交）..."
 git merge main --squash --no-commit
+echo
 
-echo "4. 创建发布提交..."
+echo ">>>>> 4. 创建发布提交..."
 COMMIT_MSG="$(date +'%Y%m%d') - $1"
 echo "提交信息: $COMMIT_MSG"
 git commit -m "$COMMIT_MSG"
+echo
 
-echo "5. 推送到远程 public 仓库..."
+echo ">>>>> 5. 推送到远程 public 仓库..."
 git push public public-sync:main
+echo
 
-echo "6. 切换回 main 分支..."
+echo ">>>>> 6. 切换回 main 分支..."
 git checkout main
+echo
 
-echo "7. 合并 public-sync 分支..."
+echo ">>>>> 7. 合并 public-sync 分支..."
 git merge public-sync
+echo
 
-echo "8. 推送 main 分支到远程..."
+echo ">>>>> 8. 推送 main 分支到远程..."
 git push
+echo
 
 echo
 echo "=== 发布完成 ==="
